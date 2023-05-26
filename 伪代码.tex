@@ -1,0 +1,436 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\author{}
+\date{}
+
+\begin{document}
+
+1:构造数列
+
+\textbf{INPUT:} array size \(m\);Lower limit of value \(L\) ;Lower limit
+of value \(R\);whether the values is \(unique\);
+
+\textbf{OUTPUT:}array \(a\)
+
+\(a\gets\ Emptyarray()\)
+
+\(n\gets\ R-L+1\)
+
+\textbf{if} \(unique\) is \(true\) \textbf{then}
+
+\textbf{if} \(ln(n+1)<1+log((n-m)+1)\) \textbf{then}
+
+\textbf{for} \(i\gets 1\) to \(m\) \textbf{do}
+
+\textbf{while} \(u\) exits in \(a\) \textbf{do}
+
+\(u\gets rand(L,R)\)
+
+\textbf{end while}
+
+append Integer \(u\) to \(a\)
+
+\textbf{end for}
+
+\textbf{else}
+
+\textbf{for} \(i\gets L\) to \(R\) \textbf{do}
+
+append \(i\) to \(a\)
+
+\textbf{end for}
+
+\(a\gets\ shuffle(a[1,m])\)
+
+\textbf{end if}
+
+\textbf{else}
+
+\textbf{for} \(i\gets L\) to \(R\) \textbf{do}
+
+\(u\gets rand(L,R)\)
+
+\textbf{while} \(u\) exits in \(a\) \textbf{do}
+
+\(u\gets rand(L,R)\)
+
+\textbf{end while}
+
+append Integer \(u\) to \(a\)
+
+\textbf{end for}4
+
+\textbf{end if}
+
+\textbf{return} \(a\)
+
+2 构造树
+
+\textbf{INPUT:} Number of nodes of the tree \(n\);
+
+\textbf{OUTPUT:}Pairs Arrays \(edge\)
+
+\textbf{for} \(i\gets 2\) to \(n\) \textbf{do}
+
+\(u\gets rand(1,i-1)\)
+
+\(v\gets i\)
+
+\(edge\) append \(\{u,v\}\)
+
+\textbf{end for}
+
+\textbf{return} \(edge\)
+
+3:构造有向无环图
+
+\textbf{INPUT:} Number of nodes of the graph \(n\);Number of edge of the
+graph \(m\);
+
+\textbf{OUTPUT:}Pairs Arrays \(edge\)
+
+\textbf{for} \(i\gets 2\) to \(n\) \textbf{do}
+
+\(u\gets rand(1,i-1)\)
+
+\(v\gets i\)
+
+\(edge\) append \(\{u,v\}\)
+
+\textbf{end for}
+
+\(Upper\ limit\gets n*(n-1)/2\)
+
+\textbf{if} \(ln(Upper\ limit+1)<1+log((Upper\ limit-m)+1)\)
+\textbf{then}
+
+for \(i\gets n\) to \(m\) \textbf{do}
+
+\textbf{while} \(u=v\ or\ edge\) exits \(\{u,v\}\) \textbf{do}
+
+\(u\gets rand(1,n)\)
+
+\(v\gets rand(1,n)\)
+
+\textbf{if} \(u>v\) \textbf{do}
+
+\(swap(u,v)\)
+
+\textbf{end do}
+
+\textbf{end while}
+
+\(edge\) append \(\{u,v\}\)
+
+\textbf{end for}
+
+\textbf{else}
+
+\textbf{while} \(size(a)< m\) \textbf{do}
+
+\(a\) append \(\{i,j\}\) where \(1\leq i < j \leq n\) and \(\{i,j\}\)
+not exits in \(a\)
+
+\textbf{end while}
+
+\textbf{end if}
+
+\textbf{return} \(a\)
+
+4:构造有向带环图
+
+\textbf{INPUT:} Number of nodes of the graph \(n\);Number of edge of the
+graph \(m\);
+
+\textbf{OUTPUT:}Pairs Arrays \(edge\)
+
+\textbf{for} \(i\gets 2\) to \(n\) \textbf{do}
+
+\(u\gets rand(1,i-1)\)
+
+\(v\gets i\)
+
+\(edge\) append \(\{u,v\}\)
+
+\textbf{end for}
+
+\(Upper\ limit\gets n*(n-1)\)
+
+\textbf{if} \(ln(Upper\ limit+1)<1+log((Upper\ limit-m)+1)\)
+\textbf{then}
+
+\(no\ ring\gets true\)
+
+for \(i\gets n\) to \(m\) \textbf{do}
+
+\textbf{while} \(u=v\ or\ edge\) exits \(\{u,v\}\) do
+
+\(u\gets rand(1,n)\)
+
+\(v\gets rand(1,n)\)
+
+\textbf{if} \(no\ ring = true\) and \(u<v\) \textbf{do}
+
+\(swap(u,v)\)
+
+\textbf{end if}
+
+\textbf{end while}
+
+\(edge\) append \(\{u,v\}\)
+
+\(no\ ring\gets false\)
+
+\textbf{end for}
+
+\textbf{else}
+
+\(a\) append \(\{j,i\}\) where \(1\leq i < j \leq n\) and \(\{j,i\}\)
+not exits in \(a\)
+
+\textbf{while} \(size(a)< m\) \textbf{do}
+
+\(a\) append \(\{i,j\}\) where \(\{i,j\}\) not exits in \(a\)
+
+\textbf{end while}
+
+\textbf{end if}
+
+\textbf{return} \(a\)
+
+5:检查是否存在负环
+
+\textbf{INPUT:} Number of nodes of the graph \(n\);Number of edge of the
+graph \(m\);struct Arrays \(edge\ with\ value\);
+
+\textbf{OUTPUT}:\(ture\) or \(false\)
+
+\(graph[][]\gets\) empty Two-dimensional arrays
+
+\textbf{for} \(\{u,v,w\}\) in \(edge\ with\ value\) \textbf{do}
+
+\(graph[u][v]=w\)
+
+\textbf{end for}
+
+\(stk\gets\) empty \(stack\)
+
+\(st[] \gets \{true\}\)
+
+\(dist[] \gets \{0\}\)
+
+\(cnt[] \gets \{0\}\)
+
+\(stk\) push \(i\) where \(1\leq i \leq n\)
+
+\textbf{while} \(size(stk)\neq0\) \textbf{do}
+
+\(t\gets \)the top of \(stk\)
+
+pop the top of \(stk\)
+
+\(st[t]=false\)
+
+\textbf{for} \(target \gets1\) to \(n\) \textbf{do}
+
+\textbf{if} \(graph[t][target]\) no null and
+\(dist[target]>dist[t]+graph[t][target]\) \textbf{do}
+
+\(dist[target]\gets dist[t]+graph[t][target]\)
+
+\(cnt[target]\gets cnt[t]+1\)
+
+\textbf{if} \(cnt[target]\ge n\) \textbf{do}
+
+\textbf{return} \(true\)
+
+\textbf{end if}
+
+\textbf{if} \(st[target]=false\) \textbf{do}
+
+\(st[target]=true\)
+
+push \(target\) into \(stk\)
+
+\textbf{end if}
+
+\textbf{end if}
+
+\textbf{end for}
+
+\textbf{end while}
+
+\textbf{return} \(false\)
+
+6: 二分图
+
+\textbf{INPUT:} Number of nodes of the graph \(n\);Number of edge of the
+graph \(m\);
+
+\textbf{OUTPUT}:Pairs Arrays \(edge\)
+
+\(graph[][]\gets \)empty array
+
+\textbf{for} \(i\gets 2\) to \(n\) \textbf{do}
+
+\(u\gets rand(1,i-1)\)
+
+\(v\gets i\)
+
+\(edge\) append \(\{u,v\}\)
+
+\(graph[u][v]=true\)
+
+\textbf{end for}
+
+\(set[2]\gets\)empty array
+
+\textbf{function} \(dfs (u,father,color) \)
+
+append \(u\) to \(set[color]\)
+
+\textbf{for} \(j\gets 1\) to \(n\) \textbf{do}
+
+\textbf{if} \(graph[u][j]=true\) and \(j\neq father\) do
+
+\textbf{call} \(dfs(j,u,color\ xor\ 1)\)
+
+\textbf{end if}
+
+\textbf{end for}
+
+\textbf{end funtion}
+
+\textbf{call} \(dfs(rand(1,n),0,0)\)
+
+\textbf{for} \(i\gets n\) to \(m\) \textbf{do}
+
+while \(u \neq v\) and \(\{i,j\}\) no exits in \(edge\) \textbf{do}
+
+\(u=rand(set[0])\)
+
+\(v=rand(set[1])\)
+
+\textbf{end while}
+
+append \(\{u,v\}\) to \(edge\)
+
+\textbf{end for}
+
+\textbf{return} \(edge\)
+
+7:仙人掌
+
+\textbf{INPUT:} Number of nodes of the graph \(n\);
+
+\textbf{OUTPUT}:Pairs Arrays \(edge\)
+
+\(top[]=\{0\}\)
+
+\(fa[]=\{0\}\)
+
+\(graph[][]={0}\)
+
+\textbf{for} \(i\gets 2\) to \(n\) \textbf{do}
+
+\(u\gets rand(1,i-1)\)
+
+\(v\gets i\)
+
+\(edge\) append \(\{u,v\}\)
+
+\(graph[u][v]=true\)
+
+\textbf{end for}
+
+\textbf{function} \(dfs (x,father,grand\ father)\)
+
+\(top[x]=grand\ father\)
+
+\(fa[x]=father\)
+
+\(link\ son\gets j\) where \(j\) is any one of \(graph[x][j]=true\)
+
+\textbf{call} \(dfs(link\ son,x,grand\ father)\)
+
+\textbf{for} \(j\gets 1\) to \(n\) \textbf{do}
+
+\textbf{if} \(graph[x][j]=true\) and \(j\neq link\ son\) \textbf{do}
+
+\textbf{call} \(dfs(j,x,j)\)
+
+\textbf{end if}
+
+\textbf{end for}
+
+\textbf{end function}
+
+\(root\gets rand(1,n)\)
+
+\textbf{cal}l \(dfs(root,0,root)\)
+
+\(vis[]=\{false\}\)
+
+\textbf{for} \(i\gets 1\) to \(n\) \textbf{do}
+
+\textbf{if} \(vis[top[i]]=false\) and \(top[i]\neq i\) and
+\(top[i]\neq fa[i]\) \textbf{do}
+
+\(vis[top[i]]=true\)
+
+append \(\{i,top[i]\} \) to \(edge\)
+
+\textbf{end if}
+
+\textbf{end for}
+
+\textbf{return edge}
+
+\end{document}
